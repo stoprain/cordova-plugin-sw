@@ -1,8 +1,8 @@
 import Foundation
 
-@objc(cordova-plugin-sw) class cordova-plugin-sw : CDVPlugin {
+@objc(cordova_plugin_sw) class cordova_plugin_sw : CDVPlugin {
 
-  func greet(command: CDVInvokedUrlCommand) {
+  public func greet(command: CDVInvokedUrlCommand) {
     print(">>>> STARTED SHOW")
   }
 
