@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="cordova-plugin-sw"
+        version="0.7.0">
+
+  <name>cordova-plugin-sw</name>
+
+  <asset src="www/cordova-plugin-sw.js" target="js/cordova-plugin-sw.js"/>
+
+  <js-module src="www/cordova-plugin-sw.js" name="cordova-plugin-sw">
+    <clobbers target="cordova-plugin-sw" />
+  </js-module>
+
+  <platform name="ios">
+    
+    <config-file target="config.xml" parent="/*">
+      <feature name="cordova-plugin-sw">
+        <param name="ios-package" value="cordova-plugin-sw" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/cordova-plugin-sw.h" />
+    <source-file src="src/ios/cordova-plugin-sw.m" />
+  </platform>
+
+</plugin>
