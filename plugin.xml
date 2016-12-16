@@ -19,8 +19,7 @@
       </feature>
     </config-file>
 
-    <header-file src="src/ios/cordova-plugin-sw.h" />
-    <source-file src="src/ios/cordova-plugin-sw.m" />
+    <source-file src="src/ios/cordova-plugin-sw.swift" />
   </platform>
 
 </plugin>
