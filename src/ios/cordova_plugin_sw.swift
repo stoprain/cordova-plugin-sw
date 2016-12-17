@@ -5,7 +5,7 @@ import Foundation
     private var c: CDVInvokedUrlCommand!
     private var nv: UINavigationController!
     
-    func greet(_ command: CDVInvokedUrlCommand) {
+    func album(_ command: CDVInvokedUrlCommand) {
         print("cordova_plugin_sw greet")
         
         self.nv = UINavigationController(rootViewController: UIViewController())
