@@ -18,8 +18,7 @@
         <param name="ios-package" value="cordova_plugin_sw" />
       </feature>
     </config-file>
-
-    <header-file src="src/ios/cordova_plugin_sw-Bridging-Header.h" />
+    
     <source-file src="src/ios/cordova_plugin_sw.swift" />
   </platform>
 
