@@ -19,7 +19,7 @@
       </feature>
     </config-file>
 
-    <header-file src="src/ios/cordova-plugin-iosrtc-Bridging-Header.h" />
+    <header-file src="src/ios/cordova-plugin-sw-Bridging-Header.h" />
     <source-file src="src/ios/cordova_plugin_sw.swift" />
   </platform>
 
