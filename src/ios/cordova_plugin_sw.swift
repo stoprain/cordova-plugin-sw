@@ -1,4 +1,5 @@
 import Foundation
+import MobileCoreServices
 
 @objc(cordova_plugin_sw) class cordova_plugin_sw : CDVPlugin, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -19,7 +20,10 @@ import Foundation
         print("cordova_plugin_sw album")
         let code = command.arguments.first!
         
+        print("cordova_plugin_sw code \(code)")
+        
         let picker = UIImagePickerController()
+        picker.mediaTypes = [(kUTTypeMovie as NSString) as String]
         picker.sourceType = .camera
         picker.cameraCaptureMode = .video
         picker.delegate = self
@@ -29,16 +33,19 @@ import Foundation
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let cache = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
-        let path = "\(cache)/\(NSUUID().uuidString)"
-        let url = URL(fileURLWithPath: path)
-        do {
-            try UIImageJPEGRepresentation(image, 0.8)?.write(to: url)
-        } catch {
-            
-        }
+        let url = info[UIImagePickerControllerMediaURL] as! NSURL
+        let path = url.absoluteString
         
+//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+//        let cache = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+//        let path = "\(cache)/\(NSUUID().uuidString)"
+//        let url = URL(fileURLWithPath: path)
+//        do {
+//            try UIImageJPEGRepresentation(image, 0.8)?.write(to: url)
+//        } catch {
+//            
+//        }
+//        
         self.viewController.dismiss(animated: true, completion: nil)
         
         let r = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: [path])
