@@ -3,26 +3,29 @@ import Foundation
 @objc(cordova_plugin_sw) class cordova_plugin_sw : CDVPlugin, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private var c: CDVInvokedUrlCommand!
-    private var nv: UINavigationController!
     
     func album(_ command: CDVInvokedUrlCommand) {
-        print("cordova_plugin_sw greet")
-        
-        self.nv = UINavigationController(rootViewController: UIViewController())
-        UIApplication.shared.keyWindow?.addSubview(self.nv.view)
+        print("cordova_plugin_sw album")
         
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.delegate = self
-        nv.present(picker, animated: false, completion: nil)
+        self.viewController.present(picker, animated: true, completion: nil)
         
         self.c = command
     }
     
-    func cleanup() {
-        self.nv.dismiss(animated: false, completion: nil)
-        self.nv.view.removeFromSuperview()
-        self.nv = nil
+    func camera(_ command: CDVInvokedUrlCommand) {
+        print("cordova_plugin_sw album")
+        let code = command.arguments.first!
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.cameraCaptureMode = .video
+        picker.delegate = self
+        self.viewController.present(picker, animated: true, completion: nil)
+        
+        self.c = command
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -36,14 +39,14 @@ import Foundation
             
         }
         
-        self.cleanup()
+        self.viewController.dismiss(animated: true, completion: nil)
         
-        let r = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: path)
+        let r = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: [path])
         self.commandDelegate.send(r, callbackId: self.c.callbackId)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.cleanup()
+        self.viewController.dismiss(animated: true, completion: nil)
         
         let r = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "")
         self.commandDelegate.send(r, callbackId: self.c.callbackId)
